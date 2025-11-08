@@ -1,0 +1,200 @@
+.about {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  position: relative;
+}
+
+.about-container {
+  width: 100%;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: translateZ(0);
+  contain: layout style paint;
+  /* Reduce backdrop filter during scroll */
+  isolation: isolate;
+}
+
+.holographic-about {
+  position: relative;
+  overflow: visible;
+}
+
+.holographic-about::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #646cff, #ff6b9d, #646cff, #646cff);
+  background-size: 300% 300%;
+  border-radius: 24px;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(12px);
+  animation: holographicFlow 5s ease-in-out infinite;
+}
+
+.holographic-about:hover::before {
+  opacity: 0.6;
+}
+
+@keyframes holographicFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(100, 108, 255, 0.3);
+  box-shadow: 0 12px 48px rgba(100, 108, 255, 0.3);
+  transform: translateY(-5px);
+}
+
+.about-content {
+  text-align: left;
+}
+
+.about-text {
+  margin-bottom: 3rem;
+}
+
+.about-text p {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.about-text .highlight {
+  color: #646cff;
+  font-weight: 600;
+  background: rgba(100, 108, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.about-text .highlight:hover {
+  background: rgba(100, 108, 255, 0.2);
+  box-shadow: 0 0 15px rgba(100, 108, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.stat-item {
+  text-align: center;
+  position: relative;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-number {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 2rem;
+  }
+  
+  .about-text p {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2.25rem;
+  }
+  
+  .stat-label {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-card {
+    padding: 1.5rem;
+  }
+  
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  
+  .about-stats {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-item {
+    padding: 0.75rem;
+  }
+}

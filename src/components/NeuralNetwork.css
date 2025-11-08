@@ -1,0 +1,27 @@
+.neural-network {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.15;
+  will-change: transform;
+  transform: translateZ(0);
+  contain: layout style paint;
+}
+
+.neural-network.scrolling {
+  opacity: 0.08;
+  transition: opacity 0.2s ease;
+}
+
+.neural-network.mobile {
+  opacity: 0.1;
+}
+
+.neural-network.mobile.scrolling {
+  opacity: 0.05;
+}
+

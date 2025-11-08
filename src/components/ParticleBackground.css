@@ -1,0 +1,27 @@
+.particle-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  will-change: transform;
+  transform: translateZ(0);
+  contain: layout style paint;
+}
+
+.particle-background.scrolling {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
+
+.particle-background.mobile {
+  opacity: 0.15;
+}
+
+.particle-background.mobile.scrolling {
+  opacity: 0.1;
+}
+

@@ -1,0 +1,225 @@
+.skills {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  position: relative;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.skill-category {
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.holographic {
+  position: relative;
+  overflow: visible;
+}
+
+.holographic::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #646cff, #ff6b9d, #646cff);
+  background-size: 200% 200%;
+  border-radius: 24px;
+  z-index: -1;
+  opacity: 0;
+  animation: holographicGlow 3s ease-in-out infinite;
+  filter: blur(10px);
+}
+
+.holographic:hover::before {
+  opacity: 0.6;
+}
+
+@keyframes holographicGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.skill-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.skill-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(100, 108, 255, 0.5));
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.skill-header h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.skill-level-bar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.skill-level-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #646cff 0%, #ff6b9d 100%);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(100, 108, 255, 0.5);
+  position: relative;
+}
+
+.skill-level-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skill-level-text {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  font-size: 0.75rem;
+  color: #646cff;
+  font-weight: 600;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.skill-tag {
+  background: rgba(100, 108, 255, 0.15);
+  color: #646cff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+  transition: all 0.3s ease;
+  cursor: default;
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+}
+
+.skill-tag.active {
+  background: rgba(100, 108, 255, 0.3);
+  border-color: #646cff;
+  box-shadow: 0 0 20px rgba(100, 108, 255, 0.6);
+  transform: scale(1.1);
+}
+
+.skill-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(100, 108, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.skill-tag:hover {
+  background: rgba(100, 108, 255, 0.25);
+  border-color: rgba(100, 108, 255, 0.5);
+  box-shadow: 0 4px 20px rgba(100, 108, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .skill-category {
+    padding: 1.5rem;
+  }
+  
+  .skill-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .skill-icon {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    gap: 1.25rem;
+  }
+  
+  .skill-category {
+    padding: 1.25rem;
+  }
+  
+  .skill-header {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .skill-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .skill-icon {
+    font-size: 1.5rem;
+  }
+  
+  .skill-tag {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .skill-level-bar {
+    height: 6px;
+  }
+}

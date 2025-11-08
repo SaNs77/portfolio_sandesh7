@@ -1,0 +1,60 @@
+═══════════════════════════════════════════════════════════════
+  QUICK EMAILJS SETUP - 5 MINUTES
+═══════════════════════════════════════════════════════════════
+
+STEP 1: Sign Up (1 min)
+───────────────────────────────────────────────────────────────
+1. Go to: https://www.emailjs.com/
+2. Click "Sign Up" (use Google/GitHub for faster signup)
+3. Verify your email
+
+STEP 2: Add Email Service (2 min)
+───────────────────────────────────────────────────────────────
+1. Click "Email Services" → "Add New Service"
+2. Choose "Gmail" (or your email provider)
+3. Click "Connect Account" and authorize
+4. COPY the Service ID (looks like: service_xxxxx)
+
+STEP 3: Create Template (1 min)
+───────────────────────────────────────────────────────────────
+1. Click "Email Templates" → "Create New Template"
+2. Choose the service you just created
+3. Set:
+   - To Email: sandeshpokharel47@gmail.com
+   - Subject: New Contact from Portfolio - {{from_name}}
+   - Content:
+     From: {{from_name}}
+     Email: {{from_email}}
+     
+     Message:
+     {{message}}
+4. Click "Save"
+5. COPY the Template ID (looks like: template_xxxxx)
+
+STEP 4: Get Public Key (30 sec)
+───────────────────────────────────────────────────────────────
+1. Click "Account" → "General"
+2. Find "Public Key"
+3. COPY it
+
+STEP 5: Create .env File (30 sec)
+───────────────────────────────────────────────────────────────
+1. In the portfolio folder, create a file named: .env
+2. Add these lines (replace with YOUR values):
+   
+   VITE_EMAILJS_SERVICE_ID=your_service_id_here
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id_here
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key_here
+
+3. Save the file
+
+STEP 6: Restart Server
+───────────────────────────────────────────────────────────────
+1. Stop your dev server (Ctrl+C)
+2. Run: npm run dev
+3. Test the contact form!
+
+═══════════════════════════════════════════════════════════════
+That's it! Your form will now send emails directly! 🎉
+═══════════════════════════════════════════════════════════════
+
