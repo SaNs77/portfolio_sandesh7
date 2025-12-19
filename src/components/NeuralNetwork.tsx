@@ -4,13 +4,14 @@ import * as THREE from 'three'
 import { useScrollPerformance } from '../hooks/useScrollPerformance'
 import { useIsMobile } from '../hooks/useIsMobile'
 import './NeuralNetwork.css'
+import { Line } from "@react-three/drei";
 
-function NeuralNode({ position, index, isScrolling }: { position: [number, number, number], index: number, isScrolling: boolean }) {
+function NeuralNode({ position, isScrolling }: { position: [number, number, number], index: number, isScrolling: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null)
-  
   useFrame((state, delta) => {
     if (meshRef.current && !isScrolling) {
       // Only animate when not scrolling
+      console.log(state)
       meshRef.current.rotation.x += delta * 0.3
       meshRef.current.rotation.y += delta * 0.3
     }
@@ -30,15 +31,27 @@ function NeuralNode({ position, index, isScrolling }: { position: [number, numbe
   )
 }
 
-function NeuralConnection({ start, end }: { start: [number, number, number], end: [number, number, number] }) {
-  const points = [new THREE.Vector3(...start), new THREE.Vector3(...end)]
-  const geometry = new THREE.BufferGeometry().setFromPoints(points)
-  
+function NeuralConnection({
+  start,
+  end,
+}: {
+  start: [number, number, number];
+  end: [number, number, number];
+}) {
+  const points = [
+    new THREE.Vector3(...start),
+    new THREE.Vector3(...end),
+  ];
+
   return (
-    <line geometry={geometry}>
-      <lineBasicMaterial color="#646cff" transparent opacity={0.3} />
-    </line>
-  )
+    <Line
+      points={points}
+      color="#646cff"
+      lineWidth={1}
+      transparent
+      opacity={0.3}
+    />
+  );
 }
 
 function NeuralNetworkScene({ isScrolling }: { isScrolling: boolean }) {

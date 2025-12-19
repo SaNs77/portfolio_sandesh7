@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 
 export const useScrollPerformance = () => {
   const [isScrolling, setIsScrolling] = useState(false)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const lastScrollY = useRef(window.scrollY)
 
   useEffect(() => {

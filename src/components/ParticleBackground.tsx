@@ -25,6 +25,7 @@ function ParticleField({ isScrolling }: { isScrolling: boolean }) {
 
   useFrame((state, delta) => {
     if (ref.current && !isScrolling) {
+      console.log('state', state)
       // Only animate when not scrolling
       ref.current.rotation.x -= delta / 20
       ref.current.rotation.y -= delta / 25
@@ -66,6 +67,7 @@ function QuantumParticles({ isScrolling }: { isScrolling: boolean }) {
 
   useFrame((state, delta) => {
     if (ref.current && !isScrolling) {
+      console.log('state', state)
       // Only animate when not scrolling
       ref.current.rotation.x += delta * 0.08
       ref.current.rotation.y += delta * 0.12

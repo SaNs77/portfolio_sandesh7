@@ -9,7 +9,6 @@ import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ErrorBoundary from './components/ErrorBoundary'
-import LoadingScreen from './components/LoadingScreen'
 import Chatbot from './components/Chatbot'
 
 // Lazy load heavy 3D components for better initial load performance

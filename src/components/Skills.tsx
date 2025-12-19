@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion} from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useState } from 'react'
 import './Skills.css'
