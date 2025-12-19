@@ -46,10 +46,19 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <nav className="nav">
+      <nav className="nav" role="navigation" aria-label="Main navigation">
         <motion.div
           className="logo"
           onClick={() => scrollToSection('hero')}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              scrollToSection('hero')
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="Go to home"
           whileHover={{ scale: 1.05, rotateZ: [0, -5, 5, 0] }}
           whileTap={{ scale: 0.95 }}
           animate={{
@@ -70,7 +79,7 @@ const Header = () => {
           </motion.span>
           <span className="logo-gradient">Portfolio</span>
         </motion.div>
-        <ul className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+        <ul id="nav-links" className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
           {navItems.map((item, index) => (
             <motion.li
               key={item.id}
@@ -95,6 +104,8 @@ const Header = () => {
           className="mobile-menu-toggle"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="nav-links"
         >
           <span className={isMobileMenuOpen ? 'open' : ''}></span>
           <span className={isMobileMenuOpen ? 'open' : ''}></span>

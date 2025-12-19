@@ -10,6 +10,7 @@ A modern, responsive portfolio website built with React and TypeScript.
 - 🔒 Type-safe with TypeScript
 - 🎯 Smooth scrolling navigation
 - 📧 Contact form
+- 🤖 AI-powered chatbot assistant
 
 ## Getting Started
 

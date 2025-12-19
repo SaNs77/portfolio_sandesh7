@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import emailjs from '@emailjs/browser'
+import getEmailJSConfig from '../config/emailjs.config'
 import './Contact.css'
 
 const Contact = () => {
@@ -39,22 +40,20 @@ const Contact = () => {
     setErrorMessage('')
 
     try {
-      // EmailJS configuration
-      // Get these from environment variables or set them directly
-      // See EMAILJS_SETUP.md for setup instructions
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_w6wyvgy'
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_bga9zhl'
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'Pj6BlXTKG-BraP41_'
-
-      // Validate that EmailJS is configured
-      if (publicKey === 'YOUR_PUBLIC_KEY' || !publicKey) {
+      // Get EmailJS configuration from centralized config
+      const emailConfig = getEmailJSConfig()
+      
+      if (!emailConfig) {
         throw new Error(
           'EmailJS is not configured. ' +
+          'Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in your .env file. ' +
           'Quick setup: 1) Sign up at https://www.emailjs.com/ (free), ' +
           '2) Create service & template, 3) Add credentials to .env file. ' +
           'See QUICK_SETUP.md for detailed steps (takes 5 minutes).'
         )
       }
+
+      const { serviceId, templateId, publicKey } = emailConfig
 
       // Send email using EmailJS
       await emailjs.send(
@@ -81,7 +80,10 @@ const Contact = () => {
       }, 5000)
     } catch (error: any) {
       // Error handling
-      console.error('EmailJS Error:', error)
+      // Only log errors in development
+      if (import.meta.env.MODE === 'development') {
+        console.error('EmailJS Error:', error)
+      }
       setSubmitStatus('error')
       setErrorMessage(
         error.text || 
@@ -125,13 +127,22 @@ const Contact = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
+            noValidate
+            aria-label="Contact form"
           >
             <h3>Send a Message</h3>
+            <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+              {submitStatus === 'success' && 'Message sent successfully'}
+              {submitStatus === 'error' && `Error: ${errorMessage || 'Failed to send message'}`}
+              {isSubmitting && 'Sending message...'}
+            </div>
             {submitStatus === 'success' && (
               <motion.div
                 className="form-message success"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
+                role="alert"
+                aria-live="polite"
               >
                 ✓ Message sent successfully! I'll get back to you soon.
               </motion.div>
@@ -141,6 +152,8 @@ const Contact = () => {
                 className="form-message error"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
+                role="alert"
+                aria-live="assertive"
               >
                 ✗ {errorMessage || 'Something went wrong. Please try again or contact me directly.'}
               </motion.div>
